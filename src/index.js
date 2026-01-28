@@ -9,6 +9,7 @@ dotenv.config();
 const { connectDB } = require('./db');
 
 const healthRouter = require('./routes/health');
+const authRouter = require('./routes/auth');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/health', healthRouter);
+app.use('/auth', authRouter);
 
 app.get('/', (req, res) => res.json({ service: 'task-trackr-api', status: 'ok' }));
 
@@ -28,7 +30,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal Server Error' });
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 connectDB()
   .then(() => {
