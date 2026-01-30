@@ -10,6 +10,8 @@ const { connectDB } = require('./db');
 
 const healthRouter = require('./routes/health');
 const authRouter = require('./routes/auth');
+const meRouter = require('./routes/me');
+const orgRouter = require('./routes/organization');
 
 const app = express();
 
@@ -20,6 +22,8 @@ app.use(express.json());
 
 app.use('/health', healthRouter);
 app.use('/auth', authRouter);
+app.use('/me', meRouter);
+app.use('/organization', orgRouter);
 
 app.get('/', (req, res) => res.json({ service: 'task-trackr-api', status: 'ok' }));
 
